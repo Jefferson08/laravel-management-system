@@ -23,7 +23,7 @@
                                     <th scope="row" class="align-middle">{{$user->id}}</th>
                                     <td class="align-middle">{{$user->name}}</td>
                                     <td class="align-middle">{{$user->email}}</td>
-                                    <td class="d-flex justify-content-center" style="border: 0;">
+                                    <td class="d-flex justify-content-center">
                                         <a href="{{route('admin.users.edit', $user->id)}}" >
                                             <button type="button" class="btn btn-warning float-left" style="margin-right:10px;">Edit</button>
                                         </a>
