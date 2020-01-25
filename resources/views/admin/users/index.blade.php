@@ -14,6 +14,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Roles</th>
                             <th scope="col" class="text-center">Actions</th>
                           </tr>
                         </thead>
@@ -23,14 +24,21 @@
                                     <th scope="row" class="align-middle">{{$user->id}}</th>
                                     <td class="align-middle">{{$user->name}}</td>
                                     <td class="align-middle">{{$user->email}}</td>
+                                    <td class="align-middle">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
                                     <td class="d-flex justify-content-center">
-                                        <a href="{{route('admin.users.edit', $user->id)}}" >
-                                            <button type="button" class="btn btn-warning float-left" style="margin-right:10px;">Edit</button>
+                                        @can('edit-users')
+                                        <a href="{{route('admin.users.edit', $user)}}" >
+                                            <button type="button" class="btn btn-primary float-left" style="margin-right:10px;">Edit</button>
                                         </a>
+                                        @endcan
                                     
-                                        <form action="{{route('admin.users.destroy', $user->id)}}" class="float-left">
+                                        @can('delete-users')
+                                        <form method="POST" action="{{route('admin.users.destroy', $user->id)}}" class="float-left">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

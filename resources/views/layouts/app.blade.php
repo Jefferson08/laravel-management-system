@@ -61,7 +61,9 @@
                                         {{ __('Logout') }}
                                     </a>
 
+                                    @can('manage-users')
                                     <a class="dropdown-item" href="{{ route('admin.users.index')}}">Management Users</a>
+                                    @endcan
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
